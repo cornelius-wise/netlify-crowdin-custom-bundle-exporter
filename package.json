@@ -1,7 +1,23 @@
 {
-    "name": "netlify-example-hello-functions",
+    "name": "crowdin-custom-bundle-exporter",
     "version": "1.0.0",
     "description": "A site to show a hello world example of using Netlify Functions",
     "author": "Netlify",
-    "license": "ISC"
+    "license": "ISC",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cornelius-wise/netlify-crowdin-custom-bundle-exporter.git"
+    },
+    "bugs": {
+        "url": "https://github.com/cornelius-wise/netlify-crowdin-custom-bundle-exporter/issues"
+    },
+    "homepage": "https://github.com/cornelius-wise/netlify-crowdin-custom-bundle-exporter#readme",
+    "devDependencies": {
+        "express": "^4.19.2"
+    }
 }
