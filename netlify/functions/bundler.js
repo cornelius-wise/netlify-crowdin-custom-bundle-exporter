@@ -1,10 +1,10 @@
-exports.handler = async data => {
-    // const { body } = data;
-    return {
-        statusCode: 200,
-        body: JSON.stringify(data)
-    }
-}
+// exports.handler = async data => {
+//     // const { body } = data;
+//     return {
+//         statusCode: 200,
+//         body: JSON.stringify(data)
+//     }
+// }
 
 exports.handler = async event => {
     const subject = event.queryStringParameters.name || 'World'
