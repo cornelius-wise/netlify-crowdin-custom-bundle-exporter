@@ -2,123 +2,167 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+const bundler = require('./netlify/functions/bundler');
 const sampleData = {
-    "jobType": "file-post-import",
-    "organization": {
-        "id": 1,
-        "domain": "{domain}",
-        "baseUrl": "https://{domain}.crowdin.com",
-        "apiBaseUrl": "https://{domain}.api.crowdin.com"
-    },
-    "project": {
-        "id": 1,
-        "identifier": "your-project-identifier",
-        "name": "Your Project Name"
-    },
-    "file": {
-        "id": 1,
-        "name": "file.xml",
-        "content": "VGhpcyBpcyBmaWxlIGNvbnRlbnQ=",
-        "contentUrl": "https://crowdin-tmp.downloads.crowdin.com/1/file.xml?aws-signature=..."
-    },
-    "sourceLanguage": {
-        "id": "es",
-        "name": "Spanish",
-        "editorCode": "es",
-        "twoLettersCode": "es",
-        "threeLettersCode": "spa",
-        "locale": "es-ES",
-        "androidCode": "es-rES",
-        "osxCode": "es.lproj",
-        "osxLocale": "es",
-        "pluralCategoryNames": ["one"],
-        "pluralRules": "(n != 1)"
-    },
-    "targetLanguages": [],
-    "strings": [
-        {
-            "By using our services, you agree to our": "En utilisant nos services, vous acceptez nos"
+    languageId: 'ja',
+    req: {
+        jobType: 'build-file',
+        organization: {
+            id: 200000009,
+            domain: 'serhiy',
+            baseUrl: 'https://serhiy.crowdin.com',
+            apiBaseUrl: 'https://serhiy.api.crowdin.com'
         },
-        {
-            "Customer agreements": "Contrats clients"
+        project: {
+            id: 398,
+            identifier: '1a57678bc6171e5713595b83e8ef8b90',
+            name: 'Unified Placeholders and Bundles'
         },
-        {
-            "Assets customer agreement (Singapore)": "Contrats clients des Actifs (Singapour)"
+        file: { id: 14854, name: 'strings.xml', path: '' },
+        customSrxContents: null,
+        sourceLanguage: {
+            id: 'en',
+            name: 'English',
+            editorCode: 'en',
+            twoLettersCode: 'en',
+            threeLettersCode: 'eng',
+            locale: 'en-US',
+            androidCode: 'en-rUS',
+            osxCode: 'en.lproj',
+            osxLocale: 'en',
+            pluralCategoryNames: [ 'one', 'other' ],
+            pluralRules: '(n != 1)'
         },
-        {
-            "and": "et "
+        targetLanguages: [
+            {
+            id: 'ja',
+            name: 'Japanese',
+            editorCode: 'ja',
+            twoLettersCode: 'ja',
+            threeLettersCode: 'jpn',
+            locale: 'ja-JP',
+            androidCode: 'ja-rJP',
+            osxCode: 'ja.lproj',
+            osxLocale: 'ja',
+            pluralCategoryNames: [ 'other' ],
+            pluralRules: '0'
+            }
+        ],
+        strings: [
+            {
+            id: 1864380,
+            identifier: 'identifier_1',
+            context: 'identifier_1',
+            customData: '',
+            maxLength: null,
+            isHidden: false,
+            hasPlurals: false,
+            labels: [],
+            text: 'String for translation 1',
+            translations: { ja: { text: '翻訳のための文字列 1', status: 'translated' } }
+            }
+        ],
+        context: {
+        jwtPayload: {
+            aud: 'WKcvYqBU59RGSRzjoMzn',
+            sub: '2',
+            domain: 'serhiy',
+            context: { project_id: 398, organization_id: 200000009, user_id: 2 },
+            iat: 1672494603.015501,
+            exp: 1672495563.015501
         },
-        {
-            "See how we process your personal data": "Découvrez comment nous traitons vos données personnelles"
+        clientId: 'serhiy__398__2',
+        crowdinId: 'serhiy'
         },
-        {
-            "when you take part in a Research Project": "lorsque vous participez à un projet de recherche"
+        project: {
+        id: 398,
+        groupId: 2,
+        userId: 2,
+        sourceLanguageId: 'en',
+        targetLanguageIds: [ 'ja', 'uk' ],
+        name: 'Unified Placeholders and Bundles',
+        identifier: '1a57678bc6171e5713595b83e8ef8b90',
+        description: '',
+        logo: 'data:image/png;base64,iV ...',
+        background: null,
+        isExternal: false,
+        externalType: null,
+        workflowId: 201,
+        hasCrowdsourcing: false,
+        publicDownloads: true,
+        createdAt: '2022-12-28T08:24:56+00:00',
+        updatedAt: '2022-12-28T08:24:56+00:00',
+        lastActivity: '2022-12-31T07:11:12+00:00',
+        targetLanguages: [
+            {
+            id: 'ja',
+            name: 'Japanese',
+            editorCode: 'ja',
+            twoLettersCode: 'ja',
+            threeLettersCode: 'jpn',
+            locale: 'ja-JP',
+            androidCode: 'ja-rJP',
+            osxCode: 'ja.lproj',
+            osxLocale: 'ja',
+            pluralCategoryNames: [ 'other' ],
+            pluralRules: '0',
+            pluralExamples: [ '0-999; 1.2...' ],
+            textDirection: 'ltr',
+            dialectOf: null
+            }
+        ],
+        translateDuplicates: 0,
+        tagsDetection: 0,
+        glossaryAccess: false,
+        isMtAllowed: true,
+        hiddenStringsProofreadersAccess: true,
+        autoSubstitution: true,
+        exportTranslatedOnly: false,
+        skipUntranslatedStrings: false,
+        skipUntranslatedFiles: false,
+        exportWithMinApprovalsCount: 0,
+        exportStringsThatPassedWorkflow: false,
+        autoTranslateDialects: false,
+        normalizePlaceholder: true,
+        saveMetaInfoInSource: true,
+        inContext: false,
+        inContextProcessHiddenStrings: true,
+        inContextPseudoLanguageId: null,
+        inContextPseudoLanguage: null,
+        isSuspended: false,
+        qaCheckIsActive: true,
+        qaCheckCategories: {
+            empty: true,
+            size: true,
+            tags: true,
+            spaces: true,
+            variables: true,
+            punctuation: true,
+            symbolRegister: true,
+            specialSymbols: true,
+            wrongTranslation: true,
+            spellcheck: true,
+            icu: true,
+            terms: false,
+            duplicate: true,
+            ftl: true
         },
-        {
-            "Invite friends and family": "Invitez vos amis et votre famille"
-        },
-        {
-            "Invite now": "Invitez vos proches"
-        },
-        {
-            "You can find more information about the product and funds on": "Vous pouvez trouver plus d'informations sur le produit et sur le fonds sur"
-        },
-        {
-            "our website": "notre site Web"
-        },
-        {
-            "Open your": "Ouvrez votre"
-        },
-        {
-            "Wise app": "appli Wise"
-        },
-        {
-            "log in and tap on 'Manage' to get your personal invite link": "connectez-vous et appuyez sur « Gérer » pour obtenir votre lien d'invitation personnel"
-        },
-        {
-            "You can learn more about how rewards work": "Vous pouvez en lire plus sur le fonctionnement des récompenses"
-        },
-        {
-            "here": "ici"
-        },
-        {
-            "***The current Program Bank is JPMorgan Chase Bank, N.A.,": "**La banque partenaire actuelle est JPMorgan Chase Bank, N.A."
-        },
-        {
-            "see Appendix 1 of the": " Consultez l'Annexe 1"
-        },
-        {
-            "Program Agreement": "de l'accord de programme"
-        },
-        {
-            "for the most updated list of Program Bank(s)": "pour la liste la plus récente des banques participantes."
-        },
-        {
-            "See Program Agreement for": "Consultez l'accord de programme pour"
-        },
-        {
-            "more details": "pour plus d'informations"
+        customQaCheckIds: [],
+        languageMapping: {},
+        delayedWorkflowStart: false,
+        notificationSettings: {
+            translatorNewStrings: false,
+            managerNewStrings: false,
+            managerLanguageCompleted: false
         }
-    ],
-    "stringsUrl": "https://tmp.downloads.crowdin.com/strings.ndjson",
+        }
+    }
 }
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+app.get('/', async (req, res) => {
+    const data = await bundler.handler(sampleData)
+    res.send(data)
 })
-
-// app.get('/', (req, res) => {
-//     const { body } = req;
-
-//   const strings = body.strings.map(s => {
-//     return {
-//       id: s.identifier,
-//       text: s.translations[body.languageId].text
-//     }
-//   })
-
-//   return res.send(JSON.stringify(result));
-// })
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
