@@ -8,10 +8,10 @@
 
 exports.handler = async (req, context) => {
 
-    return new Response({
-        status: 200,
-        body: "hello"
-    });
+    return {
+        body: JSON.stringify({ message: "Hello World" }),
+        statusCode: 200
+      };
 
     // const subject = event.queryStringParameters.name || 'World'
     // console.log(JSON.stringify(event))
