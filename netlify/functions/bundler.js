@@ -6,6 +6,15 @@ exports.handler = async data => {
     }
 }
 
+exports.handler = async event => {
+    const subject = event.queryStringParameters.name || 'World'
+    console.log(JSON.stringify(event))
+    return {
+        statusCode: 200,
+        body: `Hello ${subject}!`,
+    }
+}
+
 // exports.handler = async data => {
 
 //     const body = data.req;
