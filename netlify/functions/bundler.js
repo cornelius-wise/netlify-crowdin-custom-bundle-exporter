@@ -6,13 +6,16 @@
 //     }
 // }
 
-exports.handler = async event => {
-    const subject = event.queryStringParameters.name || 'World'
-    console.log(JSON.stringify(event))
-    return {
-        statusCode: 200,
-        body: `Hello ${subject}!`,
-    }
+exports.handler = async (req, context) => {
+    
+    return new Response("Hello, world!");
+
+    // const subject = event.queryStringParameters.name || 'World'
+    // console.log(JSON.stringify(event))
+    // return {
+    //     statusCode: 200,
+    //     body: `Hello ${subject}!`,
+    // }
 }
 
 // exports.handler = async data => {
