@@ -1,6 +1,9 @@
 exports.handler = async data => {
     // const { body } = data;
-    return JSON.stringify(data);
+    return {
+        statusCode: 200,
+        body: JSON.stringify(data)
+    }
 }
 
 // exports.handler = async data => {
