@@ -1,4 +1,7 @@
-
+exports.handler = async data => {
+    const { body } = data;
+    return JSON.stringify(body);
+}
 
 // exports.handler = async data => {
 
@@ -15,10 +18,9 @@
 //     return JSON.stringify(result);
 // }
 
-exports.handler = async (req, res) => {
-    const { body } = req;
-    return res.send(JSON.stringify(body));
-
+// exports.handler = async (req, res) => {
+//     const { body } = req;
+    
 //   const result = body.strings.map(s => {
 //     return {
 //       id: s.identifier,
@@ -27,4 +29,4 @@ exports.handler = async (req, res) => {
 //   })
 
 //   return res.send(JSON.stringify(result));
-}
+// }
