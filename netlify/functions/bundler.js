@@ -1,6 +1,6 @@
 exports.handler = async data => {
-    const { body } = data;
-    return JSON.stringify(body);
+    // const { body } = data;
+    return JSON.stringify(data);
 }
 
 // exports.handler = async data => {
