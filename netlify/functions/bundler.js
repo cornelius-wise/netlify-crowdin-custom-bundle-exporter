@@ -6,13 +6,13 @@
 //     }
 // }
 
-exports.handler = async (event, context) => {
-    const { body } = event;
+// exports.handler = async (event, context) => {
+    // const { body } = event;
 
-    return {
-        body: JSON.stringify(body),
-        statusCode: 200
-      };
+    // return {
+    //     body: JSON.stringify(body),
+    //     statusCode: 200
+    //   };
 
     // const subject = event.queryStringParameters.name || 'World'
     // console.log(JSON.stringify(event))
@@ -20,7 +20,7 @@ exports.handler = async (event, context) => {
     //     statusCode: 200,
     //     body: `Hello ${subject}!`,
     // }
-}
+// }
 
 // exports.handler = async data => {
 
@@ -37,15 +37,15 @@ exports.handler = async (event, context) => {
 //     return JSON.stringify(result);
 // }
 
-// exports.handler = async (req, res) => {
-//     const { body } = req;
+exports.handler = async (event, context) => {
+    const { body } = event;
     
-//   const result = body.strings.map(s => {
-//     return {
-//       id: s.identifier,
-//       text: s.translations[body.languageId].text
-//     }
-//   })
+  const result = body.strings.map(s => {
+    return {
+      id: s.identifier,
+      text: s.translations[body.languageId].text
+    }
+  })
 
-//   return res.send(JSON.stringify(result));
-// }
+  return res.send(JSON.stringify(result));
+}
