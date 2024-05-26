@@ -6,10 +6,11 @@
 //     }
 // }
 
-exports.handler = async (req, context) => {
+exports.handler = async (event, context) => {
+    const { body } = event;
 
     return {
-        body: JSON.stringify({ message: "Hello World" }),
+        body: JSON.stringify(body),
         statusCode: 200
       };
 
