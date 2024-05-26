@@ -7,8 +7,11 @@
 // }
 
 exports.handler = async (req, context) => {
-    
-    return new Response("Hello, world!");
+
+    return new Response({
+        status: 200,
+        body: "hello"
+    });
 
     // const subject = event.queryStringParameters.name || 'World'
     // console.log(JSON.stringify(event))
